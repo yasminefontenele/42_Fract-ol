@@ -31,7 +31,7 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		putstr_fd(ERROR_MENSAGE, STDERR_FILENO);
+		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 }

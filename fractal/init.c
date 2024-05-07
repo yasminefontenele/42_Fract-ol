@@ -18,6 +18,12 @@ static void	malloc_error(void)
 	exit(EXIT_FAILURE);
 }
 
+void	data_init(t_fractal *fractal)
+{
+	fractal->scape_value = 4;//2^2=hipotenusa
+	fractal->iterations_definition = 42;
+}
+
 void	fractal_init(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
@@ -46,6 +52,6 @@ void	fractal_init(t_fractal *fractal)
 												&fractal->img.bpp,
 												&fractal->img.line_len,
 												&fractal->img.endian);
-	events_init(fractal);
-	data_init(fractal);
+	events_init(fractal);//hooks init
+	data_init(fractal);//
 }

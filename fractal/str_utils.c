@@ -12,27 +12,27 @@
 
 #include "fractol.h"
 
-int ft_strncmp(char *s1, char *s2, int n)
+int ft_strncmp(char *s1, char *s2, int i)
 {
 	if(s1 == NULL || s2 == NULL)
 		return(0);
-	while(*s1 == *s2 && *s1 != '\0')
+	while(*s1 == *s2 && *s1 != '\0' && i > 0)
 	{
 		s1++;
 		s2++;
-		n--;
+		i--;
 	}
 	return(*s1 - *s2);
 }
 
-void ft_putstr_fd(char *s, int fd)
+void ft_putstr_fd(char *str, int fd)
 {
-	if(NULL == s || fd < 0)
+	if(NULL == str || fd < 0)
 		return;
-	if(*s)
+	if(*str)
 	{
-		write(fd, s, 1);
-		ft_putstr_fd(s + 1, fd);
+		write(fd, str, 1);
+		ft_putstr_fd(str + 1, fd);//para passar para o proximo caracterie
 	}
 }
 
@@ -59,7 +59,7 @@ double atoi_float_to_double(char *s)
 		s++;
 	while(*s)
 	{
-		pow /= 10
+		pow /= 10;
 		fractional_part = fractional_part + (*s++ - 48) * pow;
 	}
 	return((integer_part + fractional_part) * sign);
