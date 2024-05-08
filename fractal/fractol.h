@@ -85,7 +85,6 @@ void	ft_putstr_fd(char *str, int fd);
 double	atoi_float_to_double(char *s);
 
 //init.c
-void	fractal_init(t_fractal *fractal);
 void	data_init(t_fractal *fractal);
 void	fractal_init(t_fractal *fractal);
 
@@ -93,5 +92,9 @@ void	fractal_init(t_fractal *fractal);
 double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);//interpolacao linear
 t_complex_num	sum_complex(t_complex_num z1, t_complex_num z2);
 t_complex_num square_complex(t_complex_num z);
+
+
+//render
+void fractal_render(t_fractal *fractal);
 
 #endif
