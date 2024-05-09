@@ -18,10 +18,38 @@ static void	malloc_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	data_init(t_fractal *fractal)
+static void	data_init(t_fractal *fractal)
 {
 	fractal->scape_value = 4;//2^2=hipotenusa
 	fractal->iterations_definition = 42;
+	fractal->shift_x = 0.0;
+	fractal->shift_y = 0.0;
+	fractal->zoom = 1.0;//definicao do zoom
+}
+
+
+static void	events_init(t_fractal *fractal)
+{
+	mlx_hook(fractal->mlx_window,
+			KeyPress,
+			KeyPressMask,
+			key_handler,
+			fractal);
+	mlx_hook(fractal->mlx_window,
+			ButtonPress,
+			ButtonPressMask,
+			mouse_handler,
+			fractal);
+	mlx_hook(fractal->mlx_window,
+			DestroyNotify,
+			StructureNotifyMask,
+			close_handler,
+			fractal);
+	mlx_hook(fractal->mlx_window,
+			MotionNotify,
+			PointerMotionMask,
+			julia_track,
+			fractal);
 }
 
 void	fractal_init(t_fractal *fractal)
@@ -52,6 +80,6 @@ void	fractal_init(t_fractal *fractal)
 												&fractal->img.bpp,
 												&fractal->img.line_len,
 												&fractal->img.endian);
-	events_init(fractal);//hooks init
-	data_init(fractal);//
+	events_init(fractal);
+	data_init(fractal);
 }

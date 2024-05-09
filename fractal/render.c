@@ -15,16 +15,43 @@
 
 static void put_my_pixel(int x, int y, t_img *img, int color)
 {
-	int offset;
+	int	offset;
+
 	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	(unsigned int *)(img->pixel_ptr + offset) = color;
+	*(unsigned int *)(img->pixel_ptr + offset) = color;
 }
+
+static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
+{	
+	if (!ft_strncmp(fractal->name, "julia", 5))
+	{
+		c->x = fractal->julia_x;
+		c->y = fractal->julia_y;
+	}
+	else
+	{
+		c->x = z->x;
+		c->y = z->y;
+	}
+}
+
 /*
+*MANDELBROT
+*		z = z^2 + c
+*		z initially is (0, 0)
+*		c is the actual point
+*
+*		z = z^2 + c -> z1 = c + c
+*
+*		JULIA
+*		./fractol julia <real> <i> 
+*		z = pixel_point + constant
+*
+*
 *	z = z^2 + c
 *	z eh o inicio (0,0)
 *	c eh o verdadeiro ponto(pixel)
 */
-
 static void handle_pixel(int x, int y, t_fractal *fractal)
 {
 	t_complex_num	z;

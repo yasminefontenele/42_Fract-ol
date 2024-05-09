@@ -9,8 +9,8 @@
 /*   Updated: 2024/03/26 15:13:03 by yfontene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//gcc *.c -Lminilibx-linux -lmlx_Linux -lx11 -lXext -o fractol
-//-lx11 -lXext vem da documentacao
+// gcc *.c -Lminilibx-linux -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lX11 -lXext -lm -o fractol
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -45,39 +45,38 @@
 #define WIDTH	800
 #define	HEIGHT	800
 
-//Complex numbers
 typedef struct s_complex_num
 {
 	double x;//real part
 	double y;//imaginary part
-} t_complex_num;
+}				t_complex_num;
 
 //Image ID
 //valores a partir de mlx_get_data_addr()
 typedef struct s_img
 {
-	void *img_ptr;//pointer to image struct
-	char *pixel_ptr;//pixel address - pointer to 1 byte
-	int bpp;//bits per pixel
-	int line_len;
-	int endian; // 0 para big-endian e 1 para little-endian
+	void	*img_ptr;//pointer to image struct
+	char	*pixel_ptr;//pixel address - pointer to 1 byte
+	int		bpp;//bits per pixel
+	int		line_len;
+	int		endian; // 0 para big-endian e 1 para little-endian
 }	t_img;
 
 //Fractals ID
 typedef struct s_fractals
 {
 	char *name;
-	void *mlx_connection;// mlx_init()
-	void *mlx_window;//mlx_new_window
-	t_img *img;//vem sa struct que lida com imagens
+	void *mlx_connection;//para iniciar
+	void *mlx_window;//abrir a janela
+	t_img *img;//vem da struct que lida com imagens
 	double scape_value;//hipotenusa
-	int	iterations_definition;
+	int	iterations_definition;//valor ajustado a qualidade da img e render
 	double zoom;
-	double shift_x;
+	double shift_x;//para controlar as coordenadas
 	double shift_y;
-	double julia_x;
-	double julia_y;
-}	t_fractal;
+	double julia_x;//parametros proprios
+	double julia_y;//https://pt.wikipedia.org/wiki/Conjunto_de_Julia
+}			t_fractal;
 
 //str_utils.c
 int		ft_strncmp(char *s1, char *s2, int i);
@@ -89,10 +88,9 @@ void	data_init(t_fractal *fractal);
 void	fractal_init(t_fractal *fractal);
 
 //math
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);//interpolacao linear
+double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);//interpolacao linear
 t_complex_num	sum_complex(t_complex_num z1, t_complex_num z2);
-t_complex_num square_complex(t_complex_num z);
-
+t_complex_num	square_complex(t_complex_num z);
 
 //render
 void fractal_render(t_fractal *fractal);
