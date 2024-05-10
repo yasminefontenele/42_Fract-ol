@@ -58,24 +58,24 @@ typedef struct s_img
 	void	*img_ptr;//pointer to image struct
 	char	*pixel_ptr;//pixel address - pointer to 1 byte
 	int		bpp;//bits per pixel
-	int		line_len;
+	int		line_len;//não é utilizado, mas precisa usar
 	int		endian; // 0 para big-endian e 1 para little-endian
 }	t_img;
 
 //Fractals ID
 typedef struct s_fractals
 {
-	char *name;
-	void *mlx_connection;//para iniciar
-	void *mlx_window;//abrir a janela
-	t_img *img;//vem da struct que lida com imagens
-	double scape_value;//hipotenusa
-	int	iterations_definition;//valor ajustado a qualidade da img e render
-	double zoom;
-	double shift_x;//para controlar as coordenadas
-	double shift_y;
-	double julia_x;//parametros proprios
-	double julia_y;//https://pt.wikipedia.org/wiki/Conjunto_de_Julia
+	char	*name;
+	void	*mlx_connection;//para iniciar
+	void	*mlx_window;//abrir a janela
+	t_img	*img;//vem da struct que lida com imagens
+	double	scape_value;//hipotenusa
+	int		iterations_definition;//valor ajustado a qualidade da img e render
+	double	zoom;
+	double	shift_x;//para controlar as coordenadas
+	double	shift_y;
+	double	julia_x;//parametros proprios
+	double	julia_y;//https://pt.wikipedia.org/wiki/Conjunto_de_Julia
 }			t_fractal;
 
 //str_utils.c
@@ -83,8 +83,7 @@ int		ft_strncmp(char *s1, char *s2, int i);
 void	ft_putstr_fd(char *str, int fd);
 double	atoi_float_to_double(char *s);
 
-//init.c
-void	data_init(t_fractal *fractal);
+//create_mlx
 void	fractal_init(t_fractal *fractal);
 
 //math
@@ -93,6 +92,12 @@ t_complex_num	sum_complex(t_complex_num z1, t_complex_num z2);
 t_complex_num	square_complex(t_complex_num z);
 
 //render
-void fractal_render(t_fractal *fractal);
+void	fractal_render(t_fractal *fractal);
+
+//movements
+int	close_handler(t_fractal *fractal);
+int	key_handler(int keysym, t_fractal *fractal);
+int	mouse_handler(int button, int x, int y, t_fractal *fractal);
+int	julia_track(int x, int y, t_fractal *fractal);
 
 #endif
