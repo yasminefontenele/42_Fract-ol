@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   create_mlx.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfontene <yfontene@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:59:50 by yfontene          #+#    #+#             */
-/*   Updated: 2024/03/26 15:59:50 by yfontene         ###   ########.fr       */
+/*   Updated: 2024/05/11 08:48:19 by yfontene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	malloc_error(void)
 
 static void	data_init(t_fractal *fractal)
 {
-	fractal->scape_value = 4;//2^2=hipotenusa
-	fractal->iterations_definition = 42;
+	fractal->escape_value = 4; // 2 ^ 2, my hypotenuse
+	fractal->iterations_defintion = 42; 
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
-	fractal->zoom = 1.0;//definicao do zoom
+	// zoom factor
+	fractal->zoom = 1.0;
 }
-
 
 static void	events_init(t_fractal *fractal)
 {
@@ -54,14 +54,15 @@ static void	events_init(t_fractal *fractal)
 
 void	fractal_init(t_fractal *fractal)
 {
+	//MLX stuff
 	fractal->mlx_connection = mlx_init();
-	if (fractal->mlx_connection == NULL)
+	if (NULL == fractal->mlx_connection)
 		malloc_error();
 	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
 										WIDTH,
 										HEIGHT,
 										fractal->name);
-	if (fractal->mlx_window == NULL)
+	if (NULL == fractal->mlx_window)
 	{
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
@@ -69,14 +70,14 @@ void	fractal_init(t_fractal *fractal)
 	}
 	fractal->img.img_ptr = mlx_new_image(fractal->mlx_connection,
 										WIDTH, HEIGHT);
-	if (fractal->img.img_ptr == NULL)
+	if (NULL == fractal->img.img_ptr)
 	{
 		mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
 		mlx_destroy_display(fractal->mlx_connection);
 		free(fractal->mlx_connection);
 		malloc_error();
 	}
-	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.img_ptr,
+	fractal->img.pixel_ptr = mlx_get_data_addr(fractal->img.img_ptr,
 												&fractal->img.bpp,
 												&fractal->img.line_len,
 												&fractal->img.endian);

@@ -40,7 +40,7 @@
 #define ELECTRIC_BLUE   0x0066FF  // A radiant blue
 #define LAVA_RED        0xFF3300  // A bright, molten red
 
-#define ERROR_MESSAGE "Hi! =)\nPlease, for" LIME_SHOCK " mandelbrot" ANSI_COLOR_RESET " enter: \n\t./fractol mandelbrot\ \nor for" HOT_PINK " Julia:" ANSI_COLOR_RESET "\n\t./fractol julia <value_1> <value_2>\n"
+#define ERROR_MESSAGE "Hi! =)\nPlease, for " LIME_SHOCK "mandelbrot" ANSI_COLOR_RESET " enter: \n\t./fractol mandelbrot \nor for" HOT_PINK " Julia:" ANSI_COLOR_RESET "\n\t./fractol julia <value_1> <value_2>\n"
 
 #define WIDTH	800
 #define	HEIGHT	800
@@ -58,25 +58,25 @@ typedef struct s_img
 	void	*img_ptr;//pointer to image struct
 	char	*pixel_ptr;//pixel address - pointer to 1 byte
 	int		bpp;//bits per pixel
-	int		line_len;//não é utilizado, mas precisa usar
 	int		endian; // 0 para big-endian e 1 para little-endian
+	int		line_len;//não é utilizado, mas precisa usar
 }	t_img;
 
 //Fractals ID
-typedef struct s_fractals
+typedef struct	s_fractal
 {
 	char	*name;
 	void	*mlx_connection;//para iniciar
 	void	*mlx_window;//abrir a janela
-	t_img	*img;//vem da struct que lida com imagens
-	double	scape_value;//hipotenusa
-	int		iterations_definition;//valor ajustado a qualidade da img e render
-	double	zoom;
+	t_img	img;//vem da struct que lida com imagens
+	double	escape_value;// hypotenuse
+	int		iterations_defintion;//valor ajustado a qualidade da img e render
 	double	shift_x;//para controlar as coordenadas
 	double	shift_y;
+	double	zoom;
 	double	julia_x;//parametros proprios
 	double	julia_y;//https://pt.wikipedia.org/wiki/Conjunto_de_Julia
-}			t_fractal;
+}				t_fractal;
 
 //str_utils.c
 int		ft_strncmp(char *s1, char *s2, int i);

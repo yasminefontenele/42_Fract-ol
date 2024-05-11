@@ -55,7 +55,7 @@ double atoi_float_to_double(char *s)
 			sign *= -1;
 	while(*s != '.' && *s)
 		integer_part = (integer_part * 10) + (*s++ - 48);
-	if(*s == ".")
+	if(*s == '.')
 		s++;
 	while(*s)
 	{

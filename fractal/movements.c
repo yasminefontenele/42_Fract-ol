@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfontene <yfontene@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:08:18 by yfontene          #+#    #+#             */
-/*   Updated: 2024/05/09 20:10:14 by yfontene         ###   ########.fr       */
+/*   Updated: 2024/05/11 08:46:39 by yfontene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	key_handler(int keysym, t_fractal *fractal)
 	else if (keysym == XK_minus)	
 		fractal->iterations_defintion -= 10;
 
-	fractal_render(fractal);//recarrega a imagem depois da acao
+	// refresh the image
+	fractal_render(fractal);
 	return 0;
 }
 
@@ -60,6 +61,7 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	fractal_render(fractal);
 	return 0;
 }
+
 //serve para dinamizar a "Julia"
 int	julia_track(int x, int y, t_fractal *fractal)
 {
